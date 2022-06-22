@@ -31,11 +31,11 @@ def main():
             if shape_type == "rectangle":
                 shape_w = int(input(f"Width of {shape_type}: "))
                 shape_h = int(input(f"Height of {shape_type}: "))
-                shape = Rectangle(shape_x, shape_y, shape_w, shape_h, [shape_r, shape_g, shape_b])
+                shape = Rectangle(shape_x, shape_y, shape_w, shape_h, (shape_r, shape_g, shape_b))
                 shape.draw(canvas)
             elif shape_type == "square":
                 shape_side = int(input(f"Side of {shape_type}: "))
-                shape = Square(shape_x, shape_y, shape_side, [shape_r, shape_g, shape_b])
+                shape = Square(shape_x, shape_y, shape_side, (shape_r, shape_g, shape_b))
                 shape.draw(canvas)
             else:
                 print("Invalid input!")
