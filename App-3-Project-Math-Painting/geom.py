@@ -12,19 +12,27 @@ class Rectangle:
         self.color = color
 
     def draw(self, canvas):
-        pass
+        print(f"Setting color to {str(self.color)} for a rectangle with:\n"
+              f"\tx={self.x}\n"
+              f"\ty={self.y}\n"
+              f"\twidth={self.width}\n"
+              f"\theight={self.height}")
+        canvas.data[self.y:(self.y + self.height), self.x:(self.x + self.width)] = self.color
 
 
-class Square(Rectangle):
+class Square:
     """
     Object representing a colored, square geometric shape with equal sides.
     """
-    # def __init__(self, x, y, side, color):
-    #     self.x = x
-    #     self.y = y
-    #     self.width = side
-    #     self.height = side
-    #     self.color = color
+    def __init__(self, x, y, side, color):
+        self.x = x
+        self.y = y
+        self.side = side
+        self.color = color
 
     def draw(self, canvas):
-        pass
+        print(f"Setting color to {str(self.color)} for a square with:\n"
+              f"\tx={self.x}\n"
+              f"\ty={self.y}\n"
+              f"\tside={self.side}")
+        canvas.data[self.y:(self.y + self.side), self.x:(self.x + self.side)] = self.color

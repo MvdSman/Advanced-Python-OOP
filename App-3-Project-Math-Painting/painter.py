@@ -17,6 +17,11 @@ class Canvas:
         if self.color == "white":
             self.data[:] = [255, 255, 255]
 
+        print(f"Created a canvas with:\n"
+              f"\twidth={self.width}\n"
+              f"\theight={self.height}\n"
+              f"\tcolor={self.color}")
+
     def generate(self, imagepath=""):
         # Create image
         img = Image.fromarray(self.data, "RGB")
