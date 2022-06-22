@@ -25,11 +25,10 @@ def main():
     canvas = Canvas(canvas_w, canvas_h, canvas_c)
 
     # Get user inputs and keep drawing until the user wants to quit
-    user_quit = False
-    while not user_quit:
+    while True:
         shape_type = input("Shape to be drawn (either 'rectangle' or 'square'). Use '[q]uit' to stop: ").lower()
         if shape_type == "quit" or shape_type == "q":
-            user_quit = True
+            break
         else:
             shape_rgb = tuple(map(int, input("Color of shape (RGB as 'RRR, GGG, BBB'): ").split(",")))
             shape_x = int(input("X-coordinate of its origin: "))
