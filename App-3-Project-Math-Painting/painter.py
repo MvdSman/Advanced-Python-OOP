@@ -1,3 +1,4 @@
+import numpy as np
 from PIL import Image
 
 class Canvas:
@@ -9,5 +10,17 @@ class Canvas:
         self.height = height
         self.color = color
 
+        # Create 3d np array of zeros, default black canvas
+        self.data = np.zeros((self.height, self.width, 3), dtype=np.uint8)
+
+        # Set canvas color to white if the default black is not wanted
+        if self.color == "white":
+            self.data[:] = [255, 255, 255]
+
     def generate(self, imagepath=""):
-        pass
+        # Create image
+        img = Image.fromarray(self.data, "RGB")
+
+        # Path requires a trailing "/"!
+        img.save(f"{imagepath}canvas.png")
+        img.show()
