@@ -56,6 +56,8 @@ class ImageScreen(Screen):
 		"""
 		Creates a link to the uploaded file on FileStack.
 
+		Adds link to the Label widget of the ImageScreen.
+
 		:return:
 		"""
 		filepath = App.get_running_app().root.ids.camera_screen.filepath
