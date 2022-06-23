@@ -42,18 +42,26 @@ class CameraScreen(Screen):
 		:return:
 		"""
 		timestamp = time.strftime('%Y-%m-%d_%H%M%S')
-		filepath = f"files/{timestamp}.png"
-		self.ids.camera.export_to_png(filepath)
+		self.filepath = f"files/{timestamp}.png"
+		self.ids.camera.export_to_png(self.filepath)
 		self.manager.current = 'image_screen'
-		self.manager.current_screen.ids.img.source = filepath  # Requires manager to access widget from another screen
+		self.manager.current_screen.ids.img.source = self.filepath  # Requires manager to access widget from another screen
 
 
 class ImageScreen(Screen):
 	"""
 	The image screen of the app: one screen class per screen required.
 	"""
-	pass
+	def create_link(self, api_key="your-api-key"):  # TODO: Add API key yourself
+		"""
+		Creates a link to the uploaded file on FileStack.
 
+		:return:
+		"""
+		filepath = App.get_running_app().root.ids.camera_screen.filepath
+		filesharer = FileSharer(filepath, api_key)
+		url = filesharer.share()
+		self.ids.link.text = url
 
 class RootWidget(ScreenManager):
 	"""
