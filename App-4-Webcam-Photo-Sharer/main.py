@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.core.clipboard import Clipboard
 import time
+import webbrowser
 
 from filesharer import FileSharer
 
@@ -53,6 +54,9 @@ class ImageScreen(Screen):
 	"""
 	The image screen of the app: one screen class per screen required.
 	"""
+
+	link_error = "Create a link first!"
+
 	def create_link(self, api_key="your-api-key"):  # TODO: Add API key yourself
 		"""
 		Creates a link to the uploaded file on FileStack.
@@ -75,8 +79,19 @@ class ImageScreen(Screen):
 		try:
 			Clipboard.copy(self.url)
 		except:
-			self.ids.link.text = "Create a link first!"
+			self.ids.link.text = self.link_error
 			Clipboard.copy("")
+
+	def open_link(self):
+		"""
+		Opens the link of the uploaded snapshot in the web browser.
+
+		:return:
+		"""
+		try:
+			webbrowser.open(self.url)
+		except:
+			self.ids.link.text = self.link_error
 
 class RootWidget(ScreenManager):
 	"""
