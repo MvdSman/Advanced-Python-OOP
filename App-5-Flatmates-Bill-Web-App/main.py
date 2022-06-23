@@ -1,3 +1,9 @@
+"""
+To-Do list:
+TODO: Expand CSS
+TODO: Add PDF Export and upload/link
+"""
+
 from flask.views import MethodView
 from flask import Flask, render_template, request
 from wtforms import Form, StringField, SubmitField
