@@ -13,6 +13,7 @@
             on_press: root.start() if root.ids.camera.play == False else root.stop()
         Button:
             text: 'Capture Snapshot'
+            on_press: root.capture()
 
 <ImageScreen>:
     GridLayout:
