@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 
+
 from filesharer import FileSharer
 
 # Load the kivy config file
@@ -13,10 +14,14 @@ class CameraScreen(Screen):
 	The camera screen of the app: one screen class per screen required.
 	"""
 	def start(self):
-		pass
+		self.ids.camera.play = True
+		self.ids.camera_button.text = 'Stop Camera'
+		self.ids.camera.texture = self.ids.camera._camera.texture
 
 	def stop(self):
-		pass
+		self.ids.camera.play = False
+		self.ids.camera_button.text = 'Start Camera'
+		self.ids.camera.texture = None
 
 	def capture(self):
 		pass
