@@ -27,6 +27,8 @@ class CameraScreen(Screen):
 		timestamp = time.strftime('%Y-%m-%d_%H%M%S')
 		filepath = f"files/{timestamp}.png"
 		self.ids.camera.export_to_png(filepath)
+		self.manager.current = 'image_screen'
+		self.manager.current_screen.ids.img.source = filepath  # Requires manager to access widget from another screen
 
 
 class ImageScreen(Screen):
