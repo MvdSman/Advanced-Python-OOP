@@ -1,0 +1,23 @@
+<FirstScreen>:
+    GridLayout:
+        cols: 1
+        padding: 10
+        spacing: 10
+        Image:
+            id: img
+            size_hint_y: 0.5
+        Label:
+            id: wiki_summary
+            size_hint_y: 0.39
+        TextInput:
+            id: user_query
+            size_hint_y: 0.06
+        Button:
+            text: 'Search Image'
+            size_hint_y: 0.05
+            on_press: root.search_image()
+
+<RootWidget>:
+    FirstScreen:
+        id: first_screen
+        name: 'first_screen'
