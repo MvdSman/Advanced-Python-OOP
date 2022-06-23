@@ -14,16 +14,33 @@ class CameraScreen(Screen):
 	The camera screen of the app: one screen class per screen required.
 	"""
 	def start(self):
+		"""
+		Starts camera and changes Button text
+
+		:return:
+		"""
 		self.ids.camera.play = True
 		self.ids.camera_button.text = 'Stop Camera'
 		self.ids.camera.texture = self.ids.camera._camera.texture
 
 	def stop(self):
+		"""
+		Stops camera and changes Button text
+
+		:return:
+		"""
 		self.ids.camera.play = False
 		self.ids.camera_button.text = 'Start Camera'
 		self.ids.camera.texture = None
 
 	def capture(self):
+		"""
+		Creates a filename with the current time and captures and saves the image under that name.
+
+		Also initiates the switch to the Image Screen and sets the Image to the taken snapshot.
+
+		:return:
+		"""
 		timestamp = time.strftime('%Y-%m-%d_%H%M%S')
 		filepath = f"files/{timestamp}.png"
 		self.ids.camera.export_to_png(filepath)
