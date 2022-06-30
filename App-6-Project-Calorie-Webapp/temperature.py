@@ -8,8 +8,8 @@ class Temperature:
 	"""
 
 	def __init__(self, country, city):
-		self.country = country
-		self.city = city
+		self.country = country.replace(' ', '-')
+		self.city = city.replace(' ', '-')
 
 		# Add headers to prevent 403 error
 		self.headers = {
@@ -22,9 +22,21 @@ class Temperature:
 			'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
 		}
 
-	def get(self, extractor_file='temperature.yaml'):
+	def _set_url(self):
+		"""
+		Sets the URL based on inputs `country` and `city`.
+		:return: Full URL to scrape.
+		"""
+		return f'https://www.timeanddate.com/weather/{self.country}/{self.city}'
+
+	def _scrape(self, extractor_file):
+		"""
+		Scrapes web-page and extracts values as instructed by the `extractor_file`.
+		:param extractor_file: YAML-file describing what to extract.
+		:return: dictionary of extracted values.
+		"""
 		# Download page
-		url = f'https://www.timeanddate.com/weather/{self.country}/{self.city}'
+		url = self._set_url()
 		req = requests.get(url=url, headers=self.headers)
 
 		# Extract element(s): return False on invalid response
@@ -32,9 +44,21 @@ class Temperature:
 		if str(req) == '<Response [200]>':
 			extractor = Extractor.from_yaml_file(extractor_file)
 			content = extractor.extract(req.text)
-			content = float(content['temp'].replace('\xa0°C', '').strip())
 		else:
 			print(f'URL response: {req}')
+
+		return content
+
+	def get(self, extractor_file='temperature.yaml'):
+		"""
+		Cleans the output of `_scrape()`
+		:param extractor_file: YAML-file describing what to extract.
+		:return: Extracted values (cleaned).
+		"""
+		content = self._scrape(extractor_file)
+
+		# Clean output
+		content = float(content['temp'].replace('\xa0°C', '').strip())
 
 		return content
 
