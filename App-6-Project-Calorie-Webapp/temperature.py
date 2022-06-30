@@ -39,6 +39,7 @@ class Temperature:
 		return content
 
 
-# temp = Temperature(country='netherlands', city='amsterdam')
-# temp_content = temp.get()
-# print(temp_content)
+if __name__ == "__main__":
+	temp = Temperature(country='netherlands', city='amsterdam')
+	temp_content = temp.get()
+	print(temp_content)

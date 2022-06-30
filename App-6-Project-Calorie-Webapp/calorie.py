@@ -30,7 +30,8 @@ class Calorie:
 		return 10*self.weight + 6.25*self.height - 5*self.age + 5 - 10*self.temperature
 
 
-# import temperature
-# temp = temperature.Temperature(country='netherlands', city='amsterdam').get()
-# cal = Calorie(weight=77, height=185, age=26, temperature=temp).calculate()
-# print(cal)
+if __name__ == "__main__":
+	import temperature
+	temp = temperature.Temperature(country='netherlands', city='amsterdam').get()
+	cal = Calorie(weight=77, height=185, age=26, temperature=temp).calculate()
+	print(cal)
