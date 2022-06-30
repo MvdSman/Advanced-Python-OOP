@@ -1,12 +1,12 @@
 from wtforms import Form, StringField, SubmitField
 
 
-class CalorieForm(Form):
+class CaloriesForm(Form):
 	weight = StringField('Weight (kg): ', default='77')
 	height = StringField('Height (cm): ', default='185')
 	age = StringField('Age: ', default='26')
 
-	country = StringField('Country: ', default='The Netherlands')
+	country = StringField('Country: ', default='Netherlands')
 	city = StringField('City: ', default='Amsterdam')
 
 	button = SubmitField('Calculate')

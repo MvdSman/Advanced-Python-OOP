@@ -58,7 +58,7 @@ class Temperature:
 		content = self._scrape(extractor_file)
 
 		# Clean output
-		content = float(content['temp'].replace('\xa0°C', '').strip())
+		content = float(content['temp'].replace('\xa0°C', '').strip()) if content else -999
 
 		return content
 
