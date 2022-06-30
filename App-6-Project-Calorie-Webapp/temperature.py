@@ -32,7 +32,7 @@ class Temperature:
 		if str(req) == '<Response [200]>':
 			extractor = Extractor.from_yaml_file(extractor_file)
 			content = extractor.extract(req.text)
-			content = float(content['temp'].replace('\xa0°C', ''))
+			content = float(content['temp'].replace('\xa0°C', '').strip())
 		else:
 			print(f'URL response: {req}')
 
