@@ -1,14 +1,17 @@
 import pandas as pd
 
 
-class Dictionary:
+class DictionaryFunc:
 	"""
 	Object that contains a dictionary of words.
 
 	Can also return definition(s) using `get_definition(term)`.
 	"""
-	def __init__(self, definitions):
-		self.definitions = pd.read_csv(definitions)
+	def __init__(self, definitions='data.csv'):
+		try:
+			self.definitions = pd.read_csv(definitions)
+		except:
+			print('Error loading the definition list!')
 
 	def get_definition(self, term):
 		"""
@@ -21,5 +24,5 @@ class Dictionary:
 
 
 if __name__ == "__main__":
-	dictionary = Dictionary('data.csv')
+	dictionary = DictionaryFunc('data.csv')
 	print(dictionary.get_definition('acid'))
