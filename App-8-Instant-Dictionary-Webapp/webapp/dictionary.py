@@ -2,9 +2,10 @@ import justpy as jp
 
 from webapp import layout
 from dictionary_func import DictionaryFunc
+from webapp import page
 
 
-class Dictionary:
+class Dictionary(page.Page):
 	path = '/dictionary'
 
 	@classmethod
