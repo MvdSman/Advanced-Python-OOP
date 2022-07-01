@@ -28,15 +28,7 @@ class NewsFeed:
 		       f'sortBy=popularity&' \
 		       f'apiKey={self.api_key}'
 
-	def get(self, interest, verbose=False):
-		"""
-		Gets the news articles of the last day based on an interest in the title.
-
-		:return: dictionary of articles.
-		"""
-		url = self._build_url(interest)
-		req = requests.get(url).json()['articles']
-
+	def _build_email(self, interest, req):
 		email_body = ''
 		print(interest)
 		if req:
@@ -46,10 +38,35 @@ class NewsFeed:
 				             f"{article['url']}\n\n"
 		else:
 			email_body = f"Sadly, no news updates were found for '{interest}'!\n\n"
+		return email_body
+
+	def get(self, interest, verbose=False):
+		"""
+		Gets the news articles of the last day based on an interest in the title.
+
+		:param interest: keyword that should be present in titles of the articles.
+        :param verbose: boolean to enable printing the email body in the console (default False).
+		:return: dictionary of articles.
+		"""
+		url = self._build_url(interest)
+		req = requests.get(url).json()['articles']
+
+		email_body = self._build_email(interest, req)
 
 		if verbose:
 			print(email_body)
 		return email_body
+
+
+def send_email(emailer_class, articles_class, subscriber):
+	emailer_class.send(
+		to=subscriber['email'],
+		subject=f"Your {subscriber['interest']} news for today!",
+		contents=f"Hi {subscriber['name']},\n\n"
+		         f"See what's on about {subscriber['interest']} today.\n\n"
+		         f"{articles_class.get(subscriber['interest'], verbose=False)}\n\n"
+		         f"Script Mailer."
+	)
 
 
 if __name__ == "__main__":
@@ -61,11 +78,4 @@ if __name__ == "__main__":
 	)
 
 	for index, row in df.iterrows():
-		emailer.send(
-			to=row['email'],
-			subject=f"Your {row['interest']} news for today!",
-			contents=f"Hi {row['name']},\n\n"
-			         f"See what's on about {row['interest']} today.\n\n"
-			         f"{articles.get(row['interest'], verbose=False)}\n\n"
-			         f"Script Mailer."
-		)
+		send_email(emailer, articles, row)
