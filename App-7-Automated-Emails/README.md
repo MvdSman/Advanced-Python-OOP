@@ -1,4 +1,4 @@
-# Calorie Calculator WebApp
+# NewsFeed Emailer
 
 ## Description
 
