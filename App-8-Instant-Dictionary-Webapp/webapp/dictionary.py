@@ -1,4 +1,5 @@
 import justpy as jp
+import requests
 
 from webapp import layout
 from dictionary_func import DictionaryFunc
@@ -41,10 +42,10 @@ class Dictionary(page.Page):
 		"""
 		dictionary = DictionaryFunc()
 		term = widget.value
-		definitions = dictionary.get_definition(term)
-		print(term)
-		print(definitions)
-		widget.outputdiv.text = "<br></br><br></br>".join(definitions)
+		# definitions = dictionary.get_definition(term)  # Direct access
+		req = requests.get(f'http://127.0.0.1:8001/api?w={term}') # Use API from App9
+		definitions = req.json()['definition']
+		widget.outputdiv.text = " ".join(definitions)
 
 
 if __name__ == "__main__":
