@@ -10,6 +10,7 @@ class CliUI:
 
 	def get_seat(self):
 		full_name = input("Enter your full name: ")
+		account = tickets.Account(name=full_name)
 
 		free_seat = False
 		while not free_seat:
@@ -19,7 +20,7 @@ class CliUI:
 			if not free_seat:
 				print(f"Seat {seat_id} was already taken! Please try again.")
 
-		return full_name, seat
+		return account, seat
 
 	def get_card(self):
 		card_valid = False
@@ -45,8 +46,6 @@ if __name__ == "__main__":
 	card = UIHost.get_card()
 
 	# Process transaction
-	transaction = tickets.Transaction(card, seat)
-	ticket = transaction.generate_ticket(account)
-
+	account.pay(card, seat)
 
 	print("Done!")

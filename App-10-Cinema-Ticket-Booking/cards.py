@@ -37,5 +37,13 @@ class Cards:
 		print(result)
 		return float(result)
 
-	def transfer(self):
-		pass
+	def transfer(self, value):
+		old_balance = self.get_balance()
+		db.update_records(self.table_name, self.database, f'"balance"={old_balance - value}',
+						  f'"type"=="{self.card_type}" AND '
+						  f'"number"=="{self.card_number}" AND '
+						  f'"cvc"=="{self.cvc}" AND '
+						  f'"holder"=="{self.holder_name}"')
+		new_balance = self.get_balance()
+		print(f"Transfer done: {old_balance} -> {new_balance}")
+		return float(new_balance)
