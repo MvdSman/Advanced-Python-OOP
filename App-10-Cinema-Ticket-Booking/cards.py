@@ -33,9 +33,11 @@ class Cards:
 		                           f'"type"=="{self.card_type}" AND '
 		                           f'"number"=="{self.card_number}" AND '
 		                           f'"cvc"=="{self.cvc}" AND '
-		                           f'"holder"=="{self.holder_name}"')[0][0]
-		print(result)
-		return float(result)
+		                           f'"holder"=="{self.holder_name}"')
+		if result:
+			balance = float(result[0][0])
+			print(balance)
+			return balance
 
 	def transfer(self, value):
 		old_balance = self.get_balance()

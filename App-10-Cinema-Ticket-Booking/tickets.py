@@ -29,6 +29,7 @@ class Account:
 	def pay(self, card, seat):
 		if self._check_balance(card, seat):
 			self._checkout(card, seat)
+			seat.claim()
 			ticket_nr = Ticket(card, seat, self.name).generate_ticket()
 			return ticket_nr
 		else:

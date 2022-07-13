@@ -12,14 +12,19 @@ class Seats:
 		self.seat_id = seat_id
 
 	def is_free(self):
-		result = db.select_records(self.table_name, self.database, '"taken"', f'"seat_id"=="{self.seat_id}"')[0][0]
-		print(result)
-		return not bool(int(result))
+		result = db.select_records(self.table_name, self.database, '"taken"', f'"seat_id"=="{self.seat_id}"')
+		if result:
+			value = bool(int(result[0][0]))
+			print(not value)
+			return not value
 
 	def get_price(self):
-		result = db.select_records(self.table_name, self.database, '"price"', f'"seat_id"=="{self.seat_id}"')[0][0]
-		print(result)
-		return float(result)
+		result = db.select_records(self.table_name, self.database, '"price"', f'"seat_id"=="{self.seat_id}"')
+		if result:
+			value = float(result[0][0])
+			print(value)
+			return value
 
 	def claim(self):
-		pass
+		db.update_records(self.table_name, self.database, '"taken"=1', f'"seat_id"=="{self.seat_id}"')
+
